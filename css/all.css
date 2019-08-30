@@ -1,0 +1,188 @@
+*{
+	margin: 0;
+	padding: 0;
+}
+
+#box1{
+	background: gray;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+}
+
+#gameBox{
+	width: 500px;
+	height: 600px;
+	left: 450px;
+	
+	background-color: white;
+	position: fixed;
+	overflow: hidden;
+	
+}
+
+.enemy{
+	/*background-color: greenyellow;*/
+	position: absolute;
+	border-radius: 50%;
+	font-weight: bold;
+	
+	/*文字*/
+	text-align: center;
+	color: white;
+	z-index: 5;
+}
+
+#plane{
+	position: absolute;
+	width: 50px;
+	top: 550px;
+	left: 225px;
+	z-index: 3;
+}
+
+.bullet{
+	width: 12px;
+	position: absolute;
+}
+
+button{
+	position: relative;
+	z-index: 2;
+}
+
+#gameName{
+	position: relative;
+	/*background-color: greenyellow;*/
+	margin: 150px auto 0;
+	
+	text-align: center;
+	color: white;
+	font-family: "微软雅黑";
+	font-size: 50px;
+	font-weight: bold;
+	cursor: default;
+	z-index: 100;
+}
+
+#beg{
+	position: relative;
+	/*background-color: greenyellow;*/
+	margin: 100px auto;
+	width: 120px;
+	
+	text-align: center;
+	color: white;
+	font-family: "微软雅黑";
+	font-size: 26px;
+	font-weight: bold;
+	cursor:pointer;
+	z-index: 100;
+}
+
+#beg:hover{
+	font-size: 28px;
+	color: skyblue;
+}
+
+.bg{
+	width: 500px;
+	position: absolute;
+	top: -10px;
+}
+
+#gameEndFont{
+	position: relative;
+	/*background-color: greenyellow;*/
+	margin: 200px auto 0;
+	
+	
+	text-align: center;
+	color: white;
+	font-family: "微软雅黑";
+	font-size: 40px;
+	font-weight: bold;
+	cursor: default;
+	z-index: 100;
+}
+
+#score{
+	position: relative;
+	/*background-color: greenyellow;*/
+	margin: 20px auto 0;
+	
+	
+	text-align: center;
+	color: white;
+	font-family: "微软雅黑";
+	font-size: 24px;
+	font-weight: bold;
+	cursor: default;
+	z-index: 100;
+}
+
+#restart{
+	position: relative;
+	/*background-color: greenyellow;*/
+	margin: 20px auto 0;
+	width: 130px;
+	
+	text-align: center;
+	color: white;
+	font-family: "微软雅黑";
+	font-size: 28px;
+	font-weight: bold;
+	cursor: pointer;
+	z-index: 100;
+}
+#restart:hover{
+	font-size: 30px;
+	color: skyblue;
+}
+
+.prop{
+	position: absolute;
+	width: 24px;
+	z-index: 6;
+}
+
+#propTS{
+	width: 100px;
+	height: 170px;
+	position: fixed;
+	left: 100px;
+	/*top: 70px;*/
+	/*background-color: yellow;*/
+}
+
+.TsImg{
+	position: relative;
+	display: block;
+	width: 0px;
+	margin: 0 auto;
+}
+
+li{
+	background-color: black;
+	list-style: none;
+	margin: 5px auto;
+	height: 100px;
+	text-align: center;
+	/*line-height: 100px;*/
+}
+
+#gameTishi{
+	width: 300px;
+	/*height: 300px;*/
+	position: fixed;
+	background: black;
+	/*left: 1000px;*/
+	top: 200px;
+	padding: 10px 10px;
+}
+
+#tishiFont{
+	/*background-color: white;*/
+	color: white;
+	line-height: 30px;
+}

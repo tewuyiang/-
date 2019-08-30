@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>飞机游戏</title>
+		<link rel="icon" type="image/x-icon" href="img/head.png"/>
+		<link rel="stylesheet" type="text/css" href="css/all.css"/>
+	</head>
+	
+	
+	<script type="text/javascript">
+		
+		
+		/**
+		 * 提前创建所有需要的元素
+		 */
+		function create(){
+			// 整个页面
+			var box1 = document.getElementById("box1");
+			
+			//创建游戏窗口
+			gameBox = document.getElementById("gameBox"); 
+			//设置游戏窗口垂直居中
+			gameBox.style.top = (box1.clientHeight - gameBox.clientHeight)/2 + "px";
+			
+			//游戏提示框
+			gameTishi = document.getElementById("gameTishi");
+			gameTishi.style.left = parseInt(getStyle( gameBox, "left")) + gameBox.clientWidth + 100 + "px";
+			gameTishi.style.top = parseInt(gameBox.style.top) + (gameBox.clientHeight - gameTishi.clientHeight)/2  + "px";
+			
+			// 道具提示
+			propTs = document.getElementById("propTS");
+//			propTs.style.top = (gameBox.clientHeight - propTs.clientHeight)/2  + "px";
+			propTs.style.top = parseInt(gameBox.style.top) - 5 +  "px";
+			propTs.style.left = gameBox.offsetLeft - parseInt(getStyle(propTs, "width")) - 20 + "px";
+			
+			// 游戏窗口背景运作
+			var bg = document.getElementsByClassName("bg")[0];
+			moveBg(bg);
+			
+			// 创建游戏名称
+			gameName = document.createElement("div");
+			gameName.id = "gameName";
+			gameName.innerText = "飞机大战圆圈";
+			
+			//创建开始游戏按钮
+			beg = document.createElement("div");
+			beg.id = "beg";
+			beg.innerText = "开始游戏";
+			beg.onclick = gameBeg;
+			
+			//创建游戏结束提示
+			gameEndFont =  document.createElement("div");
+			gameEndFont.id = "gameEndFont";
+			gameEndFont.innerText = "游戏结束";
+			
+			//创建分数提示
+			scoreFont = document.createElement("div");
+			scoreFont.id = "score";
+			
+			// 创建再来一次按钮
+			restart = document.createElement("div");
+			restart.id = "restart";
+			restart.innerText = "再来一次";
+			restart.onclick = reStart;
+		}
+		
+		/**
+		 * 准备游戏开始前的界面
+		 */
+		function gamePrepare(){
+			
+			//创建飞机
+			plane = document.createElement("img");
+			plane.src = "img/plane.png";
+			plane.id = "plane";
+			//飞机初始移动速度
+			plane.speed = 5;
+			//飞机初始子弹频率
+			plane.bulletHZ = 250;
+			//飞机初始子弹样式
+			plane.bulletImg = "img/BossBullet.png";
+			//飞机设置为存在状态
+			plane.live = true;
+			//设置道具数量
+			plane.speedProp = 0;
+			plane.hzProp = 0;
+			plane.stopProp = 0;
+			
+			// 在窗口添加游戏名称和开始按钮
+			gameBox.appendChild(gameName);
+			gameBox.appendChild(beg);
+			
+		}
+		
+		/**
+		 * 开始游戏
+		 */
+		function gameBeg(){
+			
+			//分数清零
+			score = 0;
+			
+			//设置造怪速度
+			gameBox.createEnemySpeed = 2000;
+			//设置道具产生的速度
+			gameBox.createPropSpeed = 10*1000;
+			
+			
+			gameBox.removeChild(gameName);
+			gameBox.removeChild(beg);
+			gameBox.appendChild(plane);
+			
+			//开启游戏功能
+			enemyToPlane();		//判断敌人是否击中飞机
+			bulletToEnemy();	//判断子弹是否击中敌人
+			propToPlane();		//判断飞机是否吃到道具
+			enemyAttack();		//敌人出击
+			movePlane();		//飞机移动
+			bulletLaunch();		//子弹发射
+			createProp();		//产生道具
+			changeDiff();		//难度提升函数
+		}
+		
+		/**
+		 * 飞机死亡，游戏结束
+		 */
+		function gameEnd(){
+			//停止产生敌人
+			clearInterval(gameBox.ceTimer);
+			
+			//清除所有敌人
+			clearEnemy();
+			
+			//停止产出道具
+			clearInterval(gameBox.createPropTimer);
+			
+			//清除游戏页面中的道具
+			clearProps();
+			
+			//停止修改游戏难度
+			clearInterval(gameBox.createEnemySpeedTimer);
+			
+			//弹出提示字样
+			gameBox.appendChild(gameEndFont);
+			scoreFont.innerText = "分数：" + score;
+			gameBox.appendChild(scoreFont);
+			gameBox.appendChild(restart);
+			
+		}
+		
+		/**
+		 * 游戏结束后重新开始
+		 */
+		function reStart(){
+			
+			//清除结束提示等内容
+			gameBox.removeChild(gameEndFont);
+			gameBox.removeChild(scoreFont);
+			gameBox.removeChild(restart);
+			
+			//准备画面
+			gamePrepare();
+		}
+		
+		
+		window.onload = function(){
+			
+			//游戏前素材准备
+			create();
+			//游戏准备界面
+			gamePrepare();
+			
+		}
+		
+	</script>
+	
+	<body>
+		<!--<button id="btn01">点击发射</button>
+		<button id="btn02">点击移动</button>-->
+		<div id="box1">
+			<div id="propTS">
+				<ul>
+					<li><img src="img/prop1.png" class="TsImg"/></li>
+					<li><img src="img/prop2.png" class="TsImg"/></li>
+					<li><img src="img/prop3.png" class="TsImg"/></li>
+				</ul>
+			</div>
+			<div id="gameBox">
+				<img src="img/bg.jpg" class="bg" />
+			</div>
+			<div id="gameTishi">
+				<table id="tishiFont">
+					<tr>
+						<td>
+							点击“开始游戏”，游戏开始。按下上下左右键使移动，飞机发射子弹攻击敌人。
+						敌人被击中，生命值-1，游戏得分+1，敌人生命值变为0即消失。
+						</td>
+					</tr>
+					<tr>
+						<td>游戏中存在三种道具：</td>
+					</tr>
+					<tr>
+						<td><img src="img/prop1.png" width="25px"> : 增加飞机移动速度，按"a"释放</td>
+					</tr>
+					<tr>
+						<td><img src="img/prop2.png" width="25px"> : 增加子弹射击速度，按"s"释放</td>
+					</tr>
+					<tr>
+						<td><img src="img/prop3.png" width="25px"> : 使敌人停止移动，按"d"释放</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</body>
+	
+	<script type="text/javascript" src="js/tools.js"></script>
+	<script type="text/javascript" src="js/enemy.js"></script>
+	<script type="text/javascript" src="js/plane.js"></script>
+	<script type="text/javascript" src="js/collision.js"></script>
+	<script type="text/javascript" src="js/background.js"></script>
+	<script type="text/javascript" src="js/prop.js"></script>
+	
+	
+</html>
