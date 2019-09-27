@@ -1,6 +1,6 @@
 ## 项目背景
 
-&emsp;&emsp;最近新学了JavaScript，为了练手写了个游戏——经典老套的的飞机游戏。因为是**JavaScript**写的，所以clone到本地后点击**index.html**即可运行。<a href="www.tewuyiang.cn">在线体验游戏请点击</a>
+&emsp;&emsp;最近新学了JavaScript，为了练手写了个游戏——经典老套的的飞机游戏。因为是**JavaScript**写的，所以clone到本地后点击**index.html**即可运行。<a href="http://www.tewuyiang.cn/">在线体验游戏请点击</a>
 
 
 
@@ -22,12 +22,13 @@
 
 ## 游戏截图
 
-<img src="img/gamepage/(XDJ2CMEUXBE}8XA~HFD_BK.png">
+<img src="img/gamepage/1.png">
 
-<img src="img/gamepage/SZ]KQ6(J8BCDBWO{3%G29$6.png">
+<img src="img/gamepage/2.png">
 
-<img src="img/gamepage/U`2C}IB0WFK4RA9X$SVB@28.png">
+<img src="img/gamepage/3.png">
 
-<img src="img/gamepage/5M5I][ZHU7Y0`HDB6_0B(UN.png">
+<img src="img/gamepage/4.png">
 
-<img src="img/gamepage/(W2~`NU]%_SXVPD5]$]OLSI.png">
+<img src="img/gamepage/5.png">
+
